@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    
+    <data>
+        
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.giveCollection.GiveCollectionViewModel" />
+        
+    </data>
+    
+    
+    
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:padding="18dp"
+        android:layout_height="match_parent"
+        tools:context=".views.giveCollection.GiveCollectionActivity">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_paper_save"
+            android:visibility="@{vm.curUser.type.equals(`teacher`)}">
+
+            <TextView
+                android:id="@+id/txt_search_student"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학생찾기"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchRecyclerView"
+                android:visibility="@{vm.searchStudents.size() > 0 }"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                tools:listitem="@layout/item_search_student"
+                tools:itemCount="3"
+                app:recyclerview_search_student_list="@{vm.searchStudents}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/txt_search_student"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/studentRecyclerView"
+                android:layout_width="match_parent"
+                android:visibility="@{vm.students.size() > 0 }"
+                android:layout_height="wrap_content"
+                app:recyclerview_students_list="@{vm.students}"
+                tools:listitem="@layout/item_student"
+                tools:itemCount="3"
+                app:layout_constraintTop_toBottomOf="@+id/searchRecyclerView"
+                app:layout_constraintBottom_toTopOf="@+id/edit_student_name"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <EditText
+                android:id="@+id/edit_student_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="학생 이름을 입력해주세요"
+                android:text="@={vm.studentName}"
+                app:layout_constraintTop_toBottomOf="@+id/studentRecyclerView"/>
+
+
+
+            <TextView
+                android:id="@+id/txt_time_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간 제한 ( 시험의 경우만 입력 , 단위 : 분)"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="@+id/edit_student_name"
+                app:layout_constraintTop_toBottomOf="@+id/edit_student_name"/>
+
+            <EditText
+                android:id="@+id/edit_time_limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_time_limit"
+                android:text="@={vm.timeLimit}"/>
+
+            <Button
+                android:id="@+id/btn_homework_save"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:text="숙제 내주기"
+                android:onDebounceClick="@{() -> vm.onClickGiveCollection(`숙제`)}"
+                app:layout_constraintEnd_toStartOf="@+id/btn_exam_save"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_time_limit"/>
+
+            <Button
+                android:id="@+id/btn_exam_save"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:text="시험 내주기"
+                android:layout_marginStart="10dp"
+                android:onDebounceClick="@{() -> vm.onClickGiveCollection(`시험`)}"
+                app:layout_constraintTop_toTopOf="@+id/btn_homework_save"
+                app:layout_constraintStart_toEndOf="@+id/btn_homework_save"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="확인"
+                android:onDebounceClick="@{() -> vm.onClickConfirm()}"
+                app:layout_constraintTop_toBottomOf="@+id/btn_exam_save"/>
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+</layout>

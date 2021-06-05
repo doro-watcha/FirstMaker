@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.home.HomeViewModel" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_layout_bottom_line"
+            android:padding="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> vm.navigatePage(0)}"
+                android:text="뒤로 가기"
+                android:textColor="@color/default_main_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="문제 풀기"
+                android:textColor="@color/default_text_color"
+                android:textSize="16sp" />
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/toolbar"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{vm.curTitle + ` 문제 풀기`}"
+                android:textColor="@color/bold_text_color"
+                android:textSize="21sp"
+                tools:text="방정식과 부등식 문제 풀기"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/subTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:visibility="@{vm.curType.equals(`숙제`)}"
+                android:text="@{vm.curTeacher.name + ` 선생님께서 내주신 숙제입니다.`}"
+                android:textColor="@color/default_black"
+                android:textSize="12sp"
+                tools:text="이동호 선생님께서 내주신 숙제입니다"
+                app:layout_constraintStart_toStartOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <TextView
+                android:id="@+id/subTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="문제풀이가 시작되면 시간이 기록됩니다.\n모르는 문제는 꼭 체크해 두길 바랍니다."
+                android:textColor="@color/default_black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/subTitle" />
+
+            <Button
+                android:id="@+id/btnNextStep"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/rounded_button"
+                android:text="@{vm.curType +  ` 시작하기`}"
+                android:textColor="@color/colorWhite"
+                android:onDebounceClick="@{() -> vm.onClickStartTest()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/subTitle2" />
+
+
+
+            <Button
+                android:id="@+id/btn_give_collection"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/rounded_button"
+                android:onDebounceClick="@{() -> vm.onClickGiveCollection()}"
+                android:text="시험 /숙제 내주기"
+                android:visibility="@{ vm.curUser.type.equals(`teacher`)}"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/btnNextStep" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

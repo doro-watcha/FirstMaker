@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.workBook.WorkBookViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingBottom="200dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="문제집 풀기"
+                android:textColor="@color/bold_text_color"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_plus_work_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{vm.curUser.type.equals(`teacher`)}"
+                app:layout_constraintTop_toTopOf="@+id/title"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:onDebounceClick="@{ () -> vm.onClickAddWorkBook()}"
+                app:layout_constraintBottom_toBottomOf="@+id/title"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_baseline_add_box_24"/>
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="내 문제집"
+                android:textColor="@color/default_main_color"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+
+            <TextView
+                android:id="@+id/noItemText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="실력 향상을 위해 풀어볼 문제집을 \n문제집 찾기에서 골라주세요!"
+                android:textColor="@color/default_black"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/mMyWorkBookRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mMyWorkBookRecyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mMyWorkBookRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/txt_title"
+                app:recyclerview_work_book_list="@{vm.myWorkBooks}"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_my_work_book" />
+
+
+            <TextView
+                android:id="@+id/searchWorkBook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="문제집 찾기"
+                android:textColor="@color/default_main_color"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/mMyWorkBookRecyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mWorkBookRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/searchWorkBook"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:recyclerview_work_book_list="@{vm.workBooks}"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_work_book" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

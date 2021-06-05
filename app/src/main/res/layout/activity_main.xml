@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <FrameLayout
+            android:id="@+id/mMainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/mBottomNavView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/mBottomNavView"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/border"
+            app:elevation="0dp"
+            app:itemBackground="@color/colorWhite"
+            app:itemHorizontalTranslationEnabled="false"
+            app:itemIconTint="@color/bottom_navigation_icon_tint"
+            app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+            app:itemTextAppearanceInactive="@style/BottomNavigationView.InActive"
+            app:itemTextColor="@color/bottom_navigation_icon_tint"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_navigation"
+            tools:background="@color/colorBlack" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </layout>
+

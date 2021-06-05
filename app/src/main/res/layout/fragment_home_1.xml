@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.home.HomeViewModel" />
+
+    </data>
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/mSwipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorWhite"
+                android:padding="20dp">
+
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="내 학습활동"
+                    android:textColor="@color/bold_text_color"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/default_main_color"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/title"
+                    app:layout_constraintStart_toEndOf="@+id/title"
+                    app:layout_constraintTop_toTopOf="@+id/title"
+                    tools:text="(안지영 학생)" />
+
+
+                <TextView
+                    android:id="@+id/txt_current_homework"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="숙제"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/title"
+                    app:layout_constraintTop_toBottomOf="@+id/title" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mHomeworkRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:visibility_invisible="@{vm.homeworks.size() > 0 &amp;&amp; vm.loadHomeworkCompleted == true  }"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_current_homework"
+                    app:recyclerview_homework_list="@{vm.homeworks}" />
+
+                <TextView
+                    android:id="@+id/txt_no_homework"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:padding="50dp"
+                    android:text="풀어야 할 숙제가 없습니다"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:visibility="@{vm.homeworks.size() == 0  &amp;&amp; vm.loadHomeworkCompleted == true }"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_current_exam"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_current_homework" />
+
+                <TextView
+                    android:id="@+id/txt_current_exam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="시험"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/txt_current_homework"
+                    app:layout_constraintTop_toBottomOf="@+id/mHomeworkRecyclerView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mExamRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:visibility_invisible="@{vm.exams.size() > 0  &amp;&amp; vm.loadExamCompleted == true }"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_current_exam"
+                    app:recyclerview_exam_list="@{vm.exams}" />
+
+
+                <TextView
+                    android:id="@+id/txt_no_exam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:padding="50dp"
+                    android:text="풀어야 할 시험이 없습니다"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:visibility="@{vm.exams.size() == 0  &amp;&amp; vm.loadExamCompleted == true }"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_current_paper"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_current_exam" />
+
+
+                <TextView
+                    android:id="@+id/txt_current_paper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="내가 만든 문제지"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/txt_current_exam"
+                    app:layout_constraintTop_toBottomOf="@+id/mExamRecyclerView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mPaperRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:visibility_invisible="@{vm.papers.size() > 0  &amp;&amp; vm.loadPaperCompleted == true}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_current_paper"
+                    app:recyclerview_paper_list="@{vm.papers}"
+                    tools:listitem="@layout/item_paper" />
+
+                <TextView
+                    android:id="@+id/txt_no_paper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="풀어야 할 문제지가 없습니다"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:visibility="@{vm.papers.size() == 0  &amp;&amp; vm.loadPaperCompleted == true }"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_current_paper" />
+
+
+                <TextView
+                    android:id="@+id/txt_manage_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="학생 관리"
+                    android:layout_marginTop="20dp"
+                    android:textSize="21sp"
+
+                    android:visibility="@{vm.curUser.type.equals(`teacher`)}"
+                    android:textColor="@color/default_black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mPaperRecyclerView"/>
+
+                <ImageView
+                    android:id="@+id/btn_plus_class"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_baseline_add_box_24"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{vm.curUser.type.equals(`teacher`)}"
+                    android:onDebounceClick="@{() -> vm.onClickAddClass()}"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:layout_constraintTop_toTopOf="@+id/txt_manage_class"
+                    app:layout_constraintStart_toEndOf="@+id/txt_manage_class"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_manage_class"
+                    android:layout_marginStart="10dp"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRecyclerView"
+                    android:layout_width="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="0dp"
+                    tools:listitem="@layout/item_class"
+                    tools:itemCount="3"
+                    android:overScrollMode="never"
+                    tools:visibility="invisible"
+                    android:layout_marginTop="10dp"
+                    android:visibility="@{vm.classes.size() > 0 &amp;&amp; vm.curUser.type.equals(`teacher`)}"
+                    app:layout_constraintTop_toBottomOf="@id/txt_manage_class"
+                    app:layout_constraintStart_toStartOf="@+id/txt_manage_class"
+                    app:recyclerview_classes="@{vm.classes}"/>
+
+                <TextView
+                    android:id="@+id/txt_no_classes"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="@string/no_classes_txt"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:paddingTop="50dp"
+                    android:visibility="@{vm.classes.size() == 0 &amp;&amp; vm.curUser.type.equals(`teacher`)}"
+                    android:paddingBottom="50dp"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_manage_class"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</layout>

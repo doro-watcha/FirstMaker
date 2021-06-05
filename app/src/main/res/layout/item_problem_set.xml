@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.math.firstMaker.model.Problem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:text="@{item.id + `번 문제 ` + item.bigChapter.name}"
+            android:textColor="@color/default_black"
+            android:textSize="21sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1번 문제 방정식과 부등식" />
+
+
+        <TextView
+            android:id="@+id/middleChapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{item.middleChapter.name + ` | ` }"
+            android:textColor="@color/default_black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="다항식과 연산 | " />
+
+        <TextView
+            android:id="@+id/smallchapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.smallChapter.name}"
+            android:textColor="@color/default_black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/middleChapter"
+            app:layout_constraintTop_toTopOf="@+id/middleChapter"
+            tools:text="곱하기 " />
+
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/default_main_color"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/middleChapter"
+            app:layout_constraintTop_toBottomOf="@+id/middleChapter"
+            tools:text="난이도 3 |" />
+
+        <TextView
+            android:id="@+id/accurate_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/default_main_color"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/level"
+            app:layout_constraintTop_toTopOf="@+id/level"
+            tools:text="평균 정답률 87%" />
+
+        <ImageView
+            android:id="@+id/problem"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="16dp"
+            srcUrl="@{item.problemUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/level" />
+
+        <Button
+            android:id="@+id/btn_replace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="다른 문제 찾기"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_black_list"
+            app:layout_constraintTop_toBottomOf="@+id/problem"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_black_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="블랙리스트 추가"
+            app:layout_constraintTop_toTopOf="@+id/btn_replace"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_replace"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

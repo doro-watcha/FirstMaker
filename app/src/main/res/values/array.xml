@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="basic">
+        <item>----------------------------------------------------------------------------------</item>
+    </string-array>
+
+    <string-array name="grade">
+        <item>고1</item>
+        <item>고2</item>
+        <item>고3</item>
+
+    </string-array>
+
+    <string-array name="bigchapter">
+        <item>수학(상)</item>
+        <item>수학(하)</item>
+        <item>수학 1</item>
+        <item>수학 2</item>
+        <item>적분과 통계</item>
+        <item>기하와 벡터</item>
+
+    </string-array>
+
+    <string-array name="middlechapter">
+
+        <item>행렬</item>
+        <item>미분</item>
+        <item>다항함수</item>
+        <item>부정적분</item>
+        <item>정적분</item>
+    </string-array>
+
+    <string-array name="smallchapter">
+
+        <item>나머지 정리와 미분</item>
+        <item>미분계수의 기하학적 의미</item>
+        <item>편미분과 삼중적분</item>
+        <item>행렬의 판단식</item>
+        <item>근의 공식</item>
+    </string-array>
+
+    <string-array name="level">
+
+        <item>상</item>
+        <item>중</item>
+        <item>하</item>
+    </string-array>
+
+    <string-array name="wrong_times">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5회 이상</item>
+    </string-array>
+</resources>

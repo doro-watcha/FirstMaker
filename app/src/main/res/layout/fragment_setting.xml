@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.setting.SettingViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="150dp"
+        android:scrollbars="none">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="프로필 보기"
+                android:textColor="@color/default_black"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_log_out"
+                android:layout_width="wrap_content"
+                android:text="로그아웃"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white_70"
+                android:onDebounceClick="@{() -> vm.onClickLogOut()}"
+                android:backgroundTint="@color/default_main_color"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/txt_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@{vm.curUser.type.equals(`student`) ? vm.curUser.student.name + ` 학생` : vm.curUser.teacher.name + ` 선생님`}"
+                android:textColor="@color/bold_text_color"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <TextView
+                android:id="@+id/txt_school_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="학교 정보"
+                android:textColor="@color/default_black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/txt_user_name" />
+
+
+            <TextView
+                android:id="@+id/school_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{vm.curUser.type.equals(`student`)}"
+                android:text="@{vm.curUser.student.school}"
+                android:textColor="@color/default_black"
+                android:textSize="16sp"
+                tools:text="지영고등학교"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txt_school_info"
+                app:layout_constraintTop_toTopOf="@+id/txt_school_info" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/default_gray"
+                app:layout_constraintTop_toBottomOf="@+id/txt_school_info" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mMyClassRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="2"
+                app:recyclerview_my_classes="@{vm.myClasses}"
+                tools:listitem="@layout/item_my_class"
+                app:layout_constraintTop_toBottomOf="@+id/divider1"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="@{vm.myClasses.size() > 0}"
+                android:layout_marginTop="6dp"
+                android:background="@color/default_gray"
+                app:layout_constraintTop_toBottomOf="@+id/mMyClassRecyclerView" />
+
+            <TextView
+                android:id="@+id/txt_study_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="공부 정보"
+                android:visibility="gone"
+                android:textColor="@color/thin_text_color"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/study_layout"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/white_layout_border_rounded"
+                app:layout_constraintTop_toBottomOf="@+id/txt_study_info">
+
+
+                <View
+                    android:id="@+id/center_view"
+                    android:layout_width="1dp"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@color/default_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/correct_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="80% 정답률"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="21sp"
+                    app:layout_constraintEnd_toStartOf="@+id/center_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/center_view" />
+
+                <TextView
+                    android:id="@+id/average_correct_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="평균 정답률 32%"
+                    android:textColor="@color/thin_text_color"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@+id/correct_rate"
+                    app:layout_constraintTop_toBottomOf="@+id/correct_rate" />
+
+
+                <TextView
+                    android:id="@+id/study_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="32시간 12초"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="21sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/center_view"
+                    app:layout_constraintTop_toTopOf="@+id/center_view" />
+
+                <TextView
+                    android:id="@+id/average_study_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="평균 시간 15시간 32초"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/study_time"
+                    app:layout_constraintTop_toBottomOf="@+id/study_time" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/txt_top_5_chapter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="TOP 5 취약한 단원"
+                android:textColor="@color/thin_text_color"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/study_layout" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vulnerable_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/txt_top_5_chapter"
+                app:recyclerview_vulnerable_chapter="@{vm.vulnerableChapter}"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_vulnerable_chapter" />
+
+
+            <TextView
+                android:id="@+id/txt_weekly_problem_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="주간 내가 푼 문제"
+                android:textColor="@color/thin_text_color"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vulnerable_recyclerview" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mBarChart"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_layout_border_rounded"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/txt_weekly_problem_number"
+                tools:itemCount="7"
+                app:recyclerview_weekly_problems="@{vm.weeklyProblemNumber}"
+                tools:listitem="@layout/item_weekly_problem" />
+
+            <TextView
+                android:id="@+id/txt_weekly_correct_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주간 정답률 변화"
+                android:textColor="@color/thin_text_color"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/mBarChart" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/mLineChart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_weekly_correct_rate" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</layout>

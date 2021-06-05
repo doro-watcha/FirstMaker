@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.math.firstMaker.model.Publish" />
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.exam.ExamViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.title}"
+                tools:text="제목 : 갓도로가 내준 시험"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/teacher"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="선생님 : 갓도로"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="내준 시각 : 2019-03-01 13:42"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/numProblem"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                tools:text="문제 수 : 3 문제"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:textColor="@color/colorBlack"
+                android:id="@+id/timeLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="제한 시간 : 60 분"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/goExam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시험보기"/>
+            <Button
+                android:id="@+id/goResult"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="결과보기"
+                tools:visibility="visible"/>
+            <Button
+                android:id="@+id/retake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다시풀기"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

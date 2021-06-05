@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.workBook.WorkBookViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="18dp"
+                android:text="문제집 풀기"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@color/white"
+                android:onDebounceClick="@{() -> vm.navigatePage(1)}"
+                android:text="뒤로 가기"
+                android:textColor="@color/default_main_color"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_cur_subject_chapter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:text="@{vm.curWorkBook.subject.name + `, ` + vm.curBigChapter.name}"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_title"
+                tools:text="고등수학, 다항식" />
+
+            <TextView
+                android:id="@+id/txt_cur_work_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:text="@{vm.curWorkBook.publisher + ` ` +  vm.curWorkBook.title + ` 문제집의 문제들입니다`}"
+                app:layout_constraintStart_toStartOf="@+id/txt_cur_subject_chapter"
+                app:layout_constraintTop_toBottomOf="@+id/txt_cur_subject_chapter"
+                tools:text="신사고 쎈 문제집의 문제들입니다" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="30dp"
+                app:recyclerview_work_book_middle_chapter_list="@{vm.workBookMiddleChapters}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_work_book_middle_chapter"
+                tools:itemCount="3"
+                app:layout_constraintTop_toBottomOf="@+id/txt_cur_work_book" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

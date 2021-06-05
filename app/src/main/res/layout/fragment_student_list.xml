@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.home.classList.detail.ClassDetailViewModel" />
+
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/default_gray">
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@{vm.curClass.name}"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="고등수학 A반" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:paddingStart="16dp"
+                app:recyclerview_my_students_list="@{vm.students}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:paddingEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_title"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_my_student" />
+
+            <TextView
+                android:id="@+id/txt_search_student"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="25dp"
+                android:text="학생 검색하기"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mRecyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchRecyclerView"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/txt_search_student"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:recyclerview_search_student_list="@{vm.searchStudents}"
+                tools:listitem="@layout/item_search_student"
+                tools:itemCount="3"/>
+
+
+            <TextView
+                android:id="@+id/txt_searched_student"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:layout_marginTop="20dp"
+                android:visibility="@{vm.curStudent != null}"
+                android:textColor="@color/black"
+                android:text="@{vm.curStudent.email + ` (` + vm.curStudent.name + `)`}"
+                tools:text="goddoro@naver.com (이동호)"
+                app:layout_constraintStart_toStartOf="@+id/edit_search_student"
+                app:layout_constraintTop_toBottomOf="@+id/searchRecyclerView"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_student"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:visibility="@{vm.curStudent != null}"
+                app:layout_constraintTop_toTopOf="@id/txt_searched_student"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_searched_student"
+                app:layout_constraintStart_toEndOf="@id/txt_searched_student"
+                android:onDebounceClick="@{() -> vm.addStudent()}"
+                android:layout_marginEnd="10dp"
+                android:text="추가"/>
+
+
+
+            <EditText
+                android:id="@+id/edit_search_student"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:hint="학생 이름을 입력해주세요"
+                android:text="@={vm.studentName}"
+                app:layout_constraintStart_toStartOf="@+id/txt_search_student"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_searched_student"/>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

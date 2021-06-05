@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">StudyPartner</string>
+    <string name="title_activity_main">Beatflo</string>
+    <string name="title_challenges">Challenge</string>
+    <string name="title_entry_feeds">Feeds</string>
+    <string name="title_notifications">Notifiaction</string>
+    <string name="title_my_page">MyPage</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="signUp">Sign Up</string>
+
+    <string name="sign_in_intro_text"><font color="#92c83d">First Maker</font>와 함께 신나는\n 수학 공부를 시작해볼까요?</string>
+    <string name="sign_in_sign_up_text">아직 회원이 아니신가요? <font color="#92c83d">회원가입하기</font></string>
+
+    <string name="wrong_storage_date">%1$s - %2$s</string>
+    <string name="wrong_storage_rate_average">평균 정답률 %1$d%%</string>
+
+    <string name="make_collection_3_sub_title">현재 총 %1$d문제가 생성되었습니다.\n%1$d문제의 예상 시험시간은 %2$d분입니다.</string>
+    <string name="make_collection_3_problem_num">현재 문제 %1$d문제</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="common_error">오류 발생</string>
+    <string name="common_login_error">로그인 실패</string>
+    <string name="common_sign_up_error">회원가입 실패</string>
+
+    <string name="error_server_txt">서버 문제가 발생하였습니다</string>
+    <string name="error_network_txt">인터넷 연결이나 서버 연결에 실패하였습니다</string>
+    <string name="error_common_txt">알 수 없는 에러가 발생하였습니다</string>
+    <string name="error_content_not_filled_txt">모든 항목을 입력해주세요.</string>
+    <string name="error_wrong_password_txt">비밀번호가 틀렸습니다</string>
+    <string name="error_password_constraint_txt">*영문자, 숫자, 특수문자를 조합한 8~20자리만 가능합니다</string>
+    <string name="error_user_not_found">존재하지 않는 유저입니다</string>
+    <string name="error_user_already_exists">이미 존재하는 유저입니다</string>
+
+    <string name="txt_already_user_message">이미 회원이신가요? <font color="#92c83d">로그인하러가기</font></string>
+    <string name="txt_hoxy_teacher">혹시 <font color="#92c83d">선생님</font>이신가요?</string>
+    <string name="txt_hoxy_student">혹시 <font color="#92c83d">학생</font>인가요?</string>
+    <string name="error_wrong_teacher_code">선생님 입력 코드가 틀립니다</string>
+
+    <string name="no_classes_txt">현재 담당하시는 클래스의 학생들을\n 학생관리로 묶어보세요!</string>
+
+    <string name="common_notification">알림</string>
+    <string name="txt_hoxy_close_application">어플리케이션을 종료하시겠습니까?</string>
+
+    <string name="txt_hoxy_close_exam">시험을 종료하시겠습니까?</string>
+
+    <string name="common_ready">준비됨</string>
+    <string name="common_continue">진행중</string>
+    <string name="common_completed">완료</string>
+
+</resources>

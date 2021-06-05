@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.math.firstMaker.model.WorkPaper" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@drawable/white_layout_border_rounded"
+        android:padding="30dp">
+
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@{item.title + `(` + item.notes.size() + `문제)`}"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="내가 만든 문제지(35문제)" />
+
+        <TextView
+            android:id="@+id/txt_chapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{item.mainChapter + ` 외 ` + item.numChapters + `개의 단원`}"
+            android:textSize="10dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/txt_title"
+            app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+
+        <TextView
+            android:id="@+id/txt_ready"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/common_ready"
+            android:textColor="@color/default_main_color_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_chapter" />
+
+
+
+        <TextView
+            android:id="@+id/txt_ready_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{item.getTime(item.createdAt)}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/txt_ready"
+            app:layout_constraintTop_toTopOf="@+id/txt_ready"
+            tools:text="2020-12-31" />
+
+        <TextView
+            android:id="@+id/txt_continue"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/default_main_color_2"
+            android:layout_height="wrap_content"
+            android:text="@{item.status}"
+            android:visibility="@{!item.status.equals(`준비됨`)}"
+            app:layout_constraintTop_toBottomOf="@+id/txt_ready"
+            tools:text="진행중"
+            app:layout_constraintStart_toStartOf="@+id/txt_ready"/>
+
+
+        <TextView
+            android:id="@+id/txt_continue_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            tools:text="2020-12-31"
+            android:text="@{item.getTime(item.updatedAt)}"
+            android:visibility="@{!item.status.equals(`준비됨`)}"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/txt_continue"
+            app:layout_constraintTop_toTopOf="@+id/txt_continue"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

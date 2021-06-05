@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.makeCollection.MakeCollectionViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="문제 검색 결과"
+                android:textColor="@color/bold_text_color"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/subTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/make_collection_3_sub_title"
+                android:textColor="@color/default_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="현재 총 20문제가 생성되었습니다.\n20문제의 예상 시험시간은 40분입니다." />
+
+            <TextView
+                android:id="@+id/problemNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/make_collection_3_problem_num"
+                android:textColor="@color/default_main_color_2"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subTitle"
+                tools:text="현재 문제 20문제" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@+id/problemNum"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_search_result"
+                android:overScrollMode="never"
+                app:recyclerview_problem_set_list="@{vm.problemSetList}"/>
+
+
+            <TextView
+                android:id="@+id/subTitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="문제지의 이름을 적어주세요"
+                android:textColor="@color/default_black"
+                android:textSize="16sp"
+                android:visibility="@{vm.problems.size() > 0}"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/mRecyclerView" />
+
+            <EditText
+                android:id="@+id/editSetTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@={vm.title}"
+                android:hint="문제지의 이름을 적어주세요"
+                android:visibility="@{vm.problems.size() > 0}"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/subTitle3" />
+
+
+            <Button
+                android:id="@+id/btn_paper_save"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_button"
+                android:onDebounceClick="@{() -> vm.onClickSaveCollection()}"
+                android:text="문제지 저장하기"
+                android:visibility="@{vm.problems.size() > 0}"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/editSetTitle" />
+
+
+            <Button
+                android:id="@+id/btn_give_collection"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_button"
+                android:onDebounceClick="@{() -> vm.onClickGiveCollection()}"
+                android:text="시험 /숙제 내주기"
+                android:visibility="@{vm.problems.size() > 0 &amp;&amp; vm.curUser.type.equals(`teacher`)}"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/btn_paper_save" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

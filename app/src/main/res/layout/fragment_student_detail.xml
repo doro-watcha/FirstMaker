@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.home.classList.detail.ClassDetailViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            tools:text="안지영 학생"
+            android:text="@{vm.pickStudent.name + ` 학생`}"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="뒤로가기"
+            android:layout_margin="18dp"
+            android:textColor="@color/default_main_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onDebounceClick="@{() -> vm.navigatePage(0)}"/>
+
+        <TextView
+            android:id="@+id/txt_homework"
+            android:layout_width="wrap_content"
+            android:text="숙제"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mHomeworkRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:paddingStart="15dp"
+            app:recyclerview_homework_list="@{vm.homeworks}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/txt_homework"
+            tools:layout_editor_absoluteX="0dp"
+            tools:listitem="@layout/item_homework" />
+
+        <TextView
+            android:id="@+id/txt_exam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/mHomeworkRecyclerView"
+            app:layout_constraintStart_toStartOf="@+id/txt_homework"
+            android:text="시험"
+            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:textColor="@color/black"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mExamRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            tools:listitem="@layout/item_exam"
+            app:recyclerview_exam_list="@{vm.exams}"
+            app:layout_constraintTop_toBottomOf="@+id/txt_exam"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.math.firstMaker.views.wrong.WrongStorageViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="200dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="틀린 문제 다시 풀기"
+                    android:text="@{vm.wrongType.title + ` 문제 풀기`}"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/btnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> vm.onClickBeforeStep()}"
+                    android:text="뒤로 가기"
+                    android:textColor="@color/default_main_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            <TextView
+                android:id="@+id/subTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:text="@{vm.wrongType.title + ` 다시 풀기`}"
+                android:textColor="@color/default_black"
+                android:textSize="21sp"
+                tools:text="틀린 문제 다시 풀기"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+            <TextView
+                android:id="@+id/subTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                tools:text="선택하신 기간, 1월 8일 부터, 5월 9일 까지 틀린 문제는 총
+8문제가 검색되었습니다."
+                android:textColor="@color/default_black"
+                app:layout_constraintStart_toStartOf="@id/subTitle"
+                app:layout_constraintTop_toBottomOf="@+id/subTitle" />
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:overScrollMode="never"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subTitle2"
+                app:recyclerview_wrong_big_chapter="@{vm.bigChapters}"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_wrong_big_chapter" />
+
+            <TextView
+                android:id="@+id/subTitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:text="시험이 시작되면 시간이 기록됩니다.\n모르는 문제는 꼭 체크해두길 바랍니다."
+                android:textColor="@color/default_black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/subTitle"
+                app:layout_constraintTop_toBottomOf="@+id/mRecyclerView" />
+
+            <EditText
+                android:id="@+id/edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="문제지의 이름을 적어주세요"
+                android:layout_marginTop="15dp"
+                android:text="@={vm.title}"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:fitsSystemWindows="true"
+                app:layout_constraintTop_toBottomOf="@+id/subTitle3"/>
+
+            <Button
+                android:id="@+id/onStartTest"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="@{() -> vm.onClickStartTest()}"
+                android:text="문제지 만들기"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintTop_toBottomOf="@+id/edit_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
